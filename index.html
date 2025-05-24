@@ -1,296 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulário Acessível | Projeto RP</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-image: linear-gradient(to right, rgb(255, 165, 0), rgb(0, 179, 164));
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      position: relative;
-    }
-    #backButton {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border: 1px solid white;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-weight: bold;
-      z-index: 100;
-    }
-    .box {
-      color: white;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 15px;
-      border-radius: 15px;
-      width: 300px;
-      text-align: center;
-    }
-    .inputBox {
-      margin-bottom: 15px;
-    }
-    .inputUser {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin-top: 5px;
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-    #voice-status {
-      color: white;
-      margin: 10px 0;
-      font-style: italic;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Projeto RP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(15, 15, 5);
+            overflow: hidden;
+        }
+
+        .banner-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .btn-cta {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% - 34cm);
+            height: 6cm;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+            text-decoration: none;
+            color: transparent;
+            font-size: 0;
+        }
+
+        #acessibilidade-trigger {
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
 </head>
+
 <body>
-  <button id="backButton">← Voltar</button>
+    <span id="acessibilidade-trigger" tabindex="0" aria-hidden="false">
+        Este é o site do Projeto RP, que oferece ajuda alimentar por meio de cestas básicas a famílias em situação de vulnerabilidade.
+        Para se cadastrar e receber uma cesta, diga: receba sua cesta.
+    </span>
 
-  <div id="voice-instructions" class="sr-only">
-    Formulário de cadastro por voz. Aguarde as instruções para começar.
-  </div>
+    <div class="banner-container">
+        <a href="pagformulario.html" class="btn-cta" aria-label="Clique aqui para se cadastrar e receber sua cesta básica"></a>
+        <img 
+            src="./img/projetorpcapa.png" 
+            alt="Banner do Projeto RP com a fundadora sorrindo ao lado de cestas básicas empilhadas" 
+            class="banner-img" 
+            aria-describedby="descricao1"
+        />
+        <p id="descricao1" hidden>
+            Página inicial do Projeto RP. À direita da imagem, a fundadora está sorrindo com diversas cestas básicas empilhadas ao fundo. 
+            O site tem como objetivo oferecer suporte alimentar a famílias necessitadas. Para iniciar seu cadastro, diga: receba sua cesta.
+        </p>
+    </div>
 
-  <div class="box">
-    <form id="cadastroForm">
-      <fieldset>
-        <legend>Cadastro Acessível</legend>
-
-        <div id="voice-status">Preparando o sistema de voz...</div>
-
-        <div class="inputBox">
-          <label for="nome">Nome completo</label>
-          <input type="text" name="nome" id="nome" class="inputUser" required />
-        </div>
-
-        <div class="inputBox">
-          <label for="endereco">Endereço</label>
-          <input type="text" name="endereco" id="endereco" class="inputUser" required />
-        </div>
-
-        <div class="inputBox">
-          <label for="telefone">Telefone</label>
-          <input type="tel" name="telefone" id="telefone" class="inputUser" required />
-        </div>
-
-        <div class="inputBox">
-          <p>Sexo:</p>
-          <input type="radio" id="feminino" name="genero" value="feminino" required />
-          <label for="feminino">Feminino</label><br />
-          <input type="radio" id="masculino" name="genero" value="masculino" required />
-          <label for="masculino">Masculino</label><br />
-          <input type="radio" id="outro" name="genero" value="outro" required />
-          <label for="outro">Outro</label>
-        </div>
-
-        <div class="inputBox">
-          <p>Já recebeu cesta básica?</p>
-          <input type="radio" id="ja-recebi" name="recebeu_cesta" value="já recebi" required />
-          <label for="ja-recebi">Já recebi cesta básica</label><br />
-          <input type="radio" id="nunca-recebi" name="recebeu_cesta" value="nunca recebi" required />
-          <label for="nunca-recebi">Nunca recebi cesta básica</label>
-        </div>
-
-        <input type="submit" id="submit" value="Cadastrar" />
-      </fieldset>
-    </form>
-  </div>
-
-  <script>
-    let recognition;
-    let currentField = 0;
-    let isListening = false;
-    let isProcessing = false;
-    const fields = [
-      { id: 'nome', question: "Por favor, diga seu nome completo", pause: 2000 },
-      { id: 'endereco', question: "Agora, diga seu endereço completo", pause: 2000 },
-      { id: 'telefone', question: "Diga seu número de telefone com DDD", pause: 2000 },
-      {
-        id: 'genero',
-        question: "Qual seu sexo? Diga feminino, masculino ou outro",
-        options: ['feminino', 'masculino', 'outro'],
-        pause: 2000
-      },
-      {
-        id: 'recebeu_cesta',
-        question: "Você já recebeu cesta básica? Diga Já recebi cesta básica ou Nunca recebi cesta básica",
-        options: ['já recebi cesta básica', 'ja recebi cesta basica', 'nunca recebi cesta básica', 'nunca recebi cesta basica', 'já recebi', 'nunca recebi'],
-        pause: 2000
-      }
-    ];
-
-    function initVoiceRecognition() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        updateVoiceStatus("Navegador não compatível com voz");
-        return null;
-      }
-
-      recognition = new SpeechRecognition();
-      recognition.lang = 'pt-BR';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-      recognition.continuous = false;
-
-      recognition.onstart = function () {
-        isListening = true;
-        updateVoiceStatus("Ouvindo... Fale agora");
-      };
-
-      recognition.onresult = function (event) {
-        const transcript = event.results[0][0].transcript.toLowerCase().trim();
-        processVoiceInput(transcript);
-      };
-
-      recognition.onerror = function (event) {
-        isListening = false;
-        console.error("Erro no reconhecimento:", event.error);
-        updateVoiceStatus("Erro ao ouvir. Tentando novamente...");
-        setTimeout(() => startListening(), 1000);
-      };
-
-      recognition.onend = function () {
-        isListening = false;
-        if (!isProcessing && currentField < fields.length && !document.hidden) {
-          setTimeout(() => startListening(), 1000);
+    <script>
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'pt-BR';
+            speechSynthesis.speak(utterance);
         }
-      };
 
-      return recognition;
-    }
+        window.onload = function() {
+            const description = "Este é o site do Projeto RP. Oferecemos ajuda alimentar por meio de cestas básicas para famílias em situação de vulnerabilidade. Para se cadastrar, diga: receba sua cesta.";
+            speak(description);
+            
+            // Inicia o reconhecimento de voz após a mensagem inicial
+            setTimeout(initSpeechRecognition, 2000);
+        };
 
-    function startListening() {
-      if (!isListening && recognition && !isProcessing) {
-        recognition.start();
-      }
-    }
+        function initSpeechRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'pt-BR';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.continuous = true; // Mantém o reconhecimento ativo continuamente
 
-    function processVoiceInput(input) {
-      isProcessing = true;
-      updateVoiceStatus("Processando: " + input);
+            recognition.onresult = function(event) {
+                const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                console.log("Você disse:", transcript);
 
-      if (input.includes("voltar")) {
-        window.location.href = 'index.html';
-        return;
-      }
+                if (transcript.includes("receba sua cesta")) {
+                    window.location.href = "pagformulario.html";
+                }
+            };
 
-      if ((input.includes("enviar") || input.includes("cadastrar")) && currentField >= fields.length) {
-        speak("Seu cadastro foi realizado com sucesso. Redirecionando...", () => {
-          window.location.href = 'sucesso.html';
-        });
-        return;
-      }
+            recognition.onerror = function(event) {
+                console.error("Erro no reconhecimento de voz:", event.error);
+                // Reinicia o reconhecimento em caso de erro
+                setTimeout(() => {
+                    recognition.start();
+                }, 1000);
+            };
 
-      const field = fields[currentField];
+            recognition.onend = function() {
+                // Reinicia automaticamente quando termina
+                recognition.start();
+            };
 
-      if (field.options) {
-        const matched = field.options.find(opt => input.includes(opt));
-        if (matched) {
-          let id = '';
-          if (matched.includes("já recebi") || matched.includes("ja recebi")) {
-            id = "ja-recebi";
-          } else if (matched.includes("nunca recebi") || matched.includes("nunca")) {
-            id = "nunca-recebi";
-          } else {
-            id = matched;
-          }
-          
-          document.getElementById(id).checked = true;
-          speak("Opção selecionada: " + matched.replace("ja recebi", "já recebi").replace("nunca", "nunca recebi"), () => {
-            isProcessing = false;
-            nextField();
-          });
-        } else {
-          speak("Não entendi. " + field.question, () => {
-            isProcessing = false;
-            startListening();
-          });
+            recognition.start();
         }
-      } else {
-        document.getElementById(field.id).value = input;
-        speak("Entendido. Você disse: " + input, () => {
-          isProcessing = false;
-          nextField();
-        });
-      }
-    }
-
-    function nextField() {
-      currentField++;
-      if (currentField < fields.length) {
-        askCurrentQuestion();
-      } else {
-        speak("Formulário completo. Para enviar, diga cadastrar ou enviar.", () => {
-          updateVoiceStatus("Diga 'cadastrar' ou 'enviar' para finalizar.");
-          isProcessing = false;
-          startListening();
-        });
-      }
-    }
-
-    function askCurrentQuestion() {
-      speechSynthesis.cancel();
-      const field = fields[currentField];
-      speak(field.question, () => {
-        updateVoiceStatus("Aguardando: " + field.question);
-        setTimeout(() => startListening(), field.pause);
-      });
-    }
-
-    function speak(text, callback) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'pt-BR';
-      utterance.onend = callback || function() {};
-      speechSynthesis.speak(utterance);
-    }
-
-    function updateVoiceStatus(text) {
-      document.getElementById('voice-status').textContent = text;
-    }
-
-    window.onload = function () {
-      document.getElementById('backButton').onclick = function () {
-        window.location.href = 'index.html';
-      };
-
-      document.getElementById('telefone').addEventListener('input', function (e) {
-        this.value = this.value.replace(/\D/g, '');
-      });
-
-      recognition = initVoiceRecognition();
-
-      speak("Bem-vindo ao cadastro por voz. Vamos começar.", () => {
-        setTimeout(() => askCurrentQuestion(), 2000);
-      });
-
-      document.getElementById('cadastroForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        window.location.href = 'sucesso.html';
-      });
-    };
-  </script>
+    </script>
 </body>
 </html>
